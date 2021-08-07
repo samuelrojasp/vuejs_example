@@ -5,11 +5,9 @@
 </template>
 <script>
 export default {
-  data: function () {
-    return {
-      isSaving: false,
-      isIdle: true,
-    };
+  props: {
+    isSaving: Boolean,
+    isIdle: Boolean,
   },
   computed: {
     message: function () {

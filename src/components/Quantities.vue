@@ -1,6 +1,9 @@
 <template>
   <div class="quantities">
-    <SavingLabel></SavingLabel>
+    <SavingLabel
+      v-bind:is-saving="isSaving"
+      v-bind:is-idle="isIdle"
+    ></SavingLabel>
     <input type="number" v-model="quantity" class="input-quantity" />
   </div>
 </template>
@@ -10,6 +13,8 @@ export default {
   data: function () {
     return {
       quantity: 0,
+      isSaving: false,
+      isIdle: true,
     };
   },
   components: {
