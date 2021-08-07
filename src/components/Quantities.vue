@@ -13,7 +13,9 @@
   </div>
 </template>
 <script>
+import orders from "@/api/orders";
 import SavingLabel from "@/components/SavingLabel";
+
 export default {
   data: function () {
     return {
@@ -54,11 +56,10 @@ export default {
     },
     autoSave: function () {
       this.isSaving = true;
-
-      setTimeout(() => {
+      orders.saveOrder(this.quantity).then(() => {
         this.isSaving = false;
         this.isIdle = false;
-      }, 1000);
+      });
     },
     hideMessage: function () {
       this.isIdle = true;
