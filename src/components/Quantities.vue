@@ -30,26 +30,18 @@ export default {
   components: {
     SavingLabel,
   },
-  mounted: function () {
-    this.setTimer();
-  },
   methods: {
     setTimer: function () {
       this.idleTimer = setInterval(this.checkInterval, 1000);
     },
     resetTimer: function () {
-      this.keyStrokes++;
       clearInterval(this.idleTimer);
       this.idleTime = 0;
       this.setTimer();
     },
     checkInterval: function () {
-      if (this.idleTime === 2 && this.keyStrokes > 0) {
+      if (this.idleTime === 2) {
         this.autoSave();
-      }
-
-      if (this.idleTime === 5) {
-        this.hideMessage();
       }
 
       this.idleTime++;
@@ -60,6 +52,8 @@ export default {
         this.isSaving = false;
         this.isIdle = false;
       });
+
+      setTimeout(this.hideMessage, 3000);
     },
     hideMessage: function () {
       this.isIdle = true;
