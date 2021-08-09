@@ -26,6 +26,7 @@ export default {
       isSaving: false,
       isHidden: true,
       timer: {},
+      excludedKeys: [38, 39, 27, 17, 18, 91, 16, 93],
     };
   },
   components: {
@@ -39,8 +40,10 @@ export default {
     });
   },
   methods: {
-    initializeTimer: function () {
-      this.timer.initializeTimer();
+    initializeTimer: function (e) {
+      if (!this.isInExcludedKeys(e.keycode)) {
+        this.timer.initializeTimer();
+      }
     },
     autoSave: function () {
       this.isHidden = false;
@@ -56,6 +59,9 @@ export default {
       setTimeout(() => {
         this.isHidden = true;
       }, 3000);
+    },
+    isInExcludedKeys(keycode) {
+      return this.excludedKeys.includes(keycode);
     },
   },
 };
