@@ -17,14 +17,14 @@ describe("Messages shown according to states", () => {
     const message = wrapper.find("p");
     await wrapper.setProps({ isSaving: true });
 
-    expect(message.text()).to.contain("Auto saving...");
+    expect(message.text()).to.contain("Auto-saving");
   });
 
   it("shows saved message when the data was saved", async () => {
     const message = wrapper.find("p");
     await wrapper.setProps({ isSaving: false, isHidden: false });
 
-    expect(message.text()).to.contain("Saved!");
+    expect(message.text()).to.contain("Saved");
   });
 
   it("hides any messages when the state is hidden", async () => {
