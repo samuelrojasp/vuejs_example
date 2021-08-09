@@ -1,6 +1,8 @@
 <template>
   <div class="quantities">
+    <label for="quantity">Quantity: </label>
     <input
+      name="quantity"
       type="number"
       v-model="quantity"
       class="input-quantity"
@@ -8,7 +10,7 @@
     />
     <SavingLabel
       v-bind:is-saving="isSaving"
-      v-bind:is-idle="isIdle"
+      v-bind:is-hidden="isHidden"
     ></SavingLabel>
   </div>
 </template>
@@ -22,7 +24,7 @@ export default {
     return {
       quantity: 0,
       isSaving: false,
-      isIdle: true,
+      isHidden: true,
       timer: {},
     };
   },
@@ -41,17 +43,17 @@ export default {
       this.timer.initializeTimer();
     },
     autoSave: function () {
+      this.isHidden = false;
       this.isSaving = true;
 
       orders.saveOrder(this.quantity).then(() => {
         this.isSaving = false;
-        this.isIdle = false;
         this.hideMessage();
       });
     },
     hideMessage: function () {
       setTimeout(() => {
-        this.isIdle = true;
+        this.isHidden = true;
       }, 3000);
     },
   },

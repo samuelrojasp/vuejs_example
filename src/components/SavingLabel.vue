@@ -1,25 +1,19 @@
 <template>
   <div>
-    <p>{{ message }}</p>
+    <p v-show="!isHidden">{{ message }}</p>
   </div>
 </template>
 <script>
 export default {
   props: {
     isSaving: Boolean,
-    isIdle: Boolean,
+    isHidden: Boolean,
   },
   computed: {
     message: function () {
-      if (this.isSaving) {
-        return "Auto saving...";
-      }
+      if (this.isSaving) return "Auto saving...";
 
-      if (!this.isSaving && !this.isIdle) {
-        return "Saved!";
-      }
-
-      return "";
+      return "Saved!";
     },
   },
 };
