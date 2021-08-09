@@ -30,7 +30,11 @@ export default {
     SavingLabel,
   },
   created: function () {
-    this.timer = new SaveTimer(1000, 2, this.autoSave, 3000);
+    this.timer = new SaveTimer({
+      interval: 1000,
+      autoSaveAfter: 2,
+      autoSaveCallback: this.autoSave,
+    });
   },
   methods: {
     initializeTimer: function () {
@@ -42,12 +46,13 @@ export default {
       orders.saveOrder(this.quantity).then(() => {
         this.isSaving = false;
         this.isIdle = false;
+        this.hideMessage();
       });
-
-      setTimeout(this.hideMessage, 3000);
     },
     hideMessage: function () {
-      this.isIdle = true;
+      setTimeout(() => {
+        this.isIdle = true;
+      }, 3000);
     },
   },
 };

@@ -1,22 +1,23 @@
 class SaveTimer {
-  constructor(interval, autoSaveAfter, autoSaveCallback, dismissMessageAfter) {
+  constructor(options) {
+    this.options = {
+      interval: options.interval || 1000,
+      autoSaveAfter: options.autoSaveAfter || 2,
+      autoSaveCallback: this.isFunction(options.autoSaveCallback),
+    };
     this.idleTime = 0;
-    this.interval = interval;
-    this.autoSaveAfter = autoSaveAfter;
-    this.autoSaveCallback = autoSaveCallback;
-    this.dismissMessageAfter = dismissMessageAfter;
   }
 
   setTimer() {
     let self = this;
     this.timer = setInterval(() => {
       self.checkTimer();
-    }, this.interval);
+    }, this.options.interval);
   }
 
   checkTimer() {
-    if (this.idleTime === this.autoSaveAfter) {
-      this.autoSaveCallback();
+    if (this.idleTime === this.options.autoSaveAfter) {
+      this.options.autoSaveCallback();
     }
 
     this.idleTime++;
@@ -26,6 +27,13 @@ class SaveTimer {
     clearInterval(this.timer);
     this.idleTime = 0;
     this.setTimer();
+  }
+
+  isFunction(func) {
+    if (typeof func == "function") return func;
+    return () => {
+      return;
+    };
   }
 }
 
