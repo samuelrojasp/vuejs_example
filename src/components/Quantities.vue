@@ -45,6 +45,7 @@ export default {
     autoSave: function () {
       this.isHidden = false;
       this.isSaving = true;
+      if (this.quantity === "") this.quantity = 0;
 
       orders.saveOrder(this.quantity).then(() => {
         this.isSaving = false;
