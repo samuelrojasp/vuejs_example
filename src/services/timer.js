@@ -16,7 +16,7 @@ class SaveTimer {
   }
 
   checkTimer() {
-    if (this.idleTime === this.options.autoSaveAfter) {
+    if (this.idleTime === this.options.autoSaveAfter - 1) {
       this.options.autoSaveCallback();
     }
 
