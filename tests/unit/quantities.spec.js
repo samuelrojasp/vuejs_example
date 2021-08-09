@@ -27,4 +27,12 @@ describe("Quantities field for orders page", () => {
 
     expect(wrapper.vm.quantity).to.equal(quantity);
   });
+
+  it("sets value as 0 when the quantity field is empty on auto-save", async () => {
+    wrapper.vm.quantity = "";
+
+    await wrapper.vm.autoSave();
+
+    expect(wrapper.vm.quantity).to.equal(0);
+  });
 });
