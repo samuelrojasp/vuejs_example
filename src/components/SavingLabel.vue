@@ -11,9 +11,9 @@ export default {
   },
   computed: {
     message: function () {
-      if (this.isSaving) return "Auto saving...";
+      if (this.isSaving) return "Auto-saving";
 
-      return "Saved!";
+      return "Saved";
     },
   },
 };
