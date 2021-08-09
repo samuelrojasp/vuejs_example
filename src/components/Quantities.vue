@@ -11,7 +11,7 @@
     />
     <SavingLabel
       v-bind:is-saving="isSaving"
-      v-bind:is-hidden="isHidden"
+      v-bind:is-hidden="labelIsHidden"
     ></SavingLabel>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
     return {
       quantity: 0,
       isSaving: false,
-      isHidden: true,
+      labelIsHidden: true,
       timer: {},
       excludedKeys: [38, 39, 27, 17, 18, 91, 16, 93],
     };
@@ -42,12 +42,13 @@ export default {
   },
   methods: {
     initializeTimer: function (e) {
+      this.labelIsHidden = true;
       if (!this.isInExcludedKeys(e.keycode)) {
         this.timer.initializeTimer();
       }
     },
     autoSave: function () {
-      this.isHidden = false;
+      this.labelIsHidden = false;
       this.isSaving = true;
       if (this.quantity === "") this.quantity = 0;
 
@@ -58,7 +59,7 @@ export default {
     },
     hideMessage: function () {
       setTimeout(() => {
-        this.isHidden = true;
+        this.labelIsHidden = true;
       }, 3000);
     },
     isInExcludedKeys(keycode) {
