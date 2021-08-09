@@ -7,6 +7,7 @@
       v-model="quantity"
       class="input-quantity"
       v-on:keyup="initializeTimer"
+      min="0"
     />
     <SavingLabel
       v-bind:is-saving="isSaving"
